@@ -6,7 +6,11 @@ use App\Http\Controllers\AccountingPeriodController;
 use App\Http\Controllers\CashBankController;
 use App\Http\Controllers\JournalEntryController;
 use App\Http\Controllers\LedgerController;
+use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\MasukController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UnitController;
 
 Route::get('/', function () {
@@ -25,7 +29,11 @@ Route::middleware([
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::resource('suppliers', SupplierController::class);
+    Route::resource('produks', ProdukController::class);
+    Route::resource('masuks', MasukController::class);
     Route::resource('accounts', AccountController::class);
+    Route::resource('siswas', SiswaController::class);
     Route::resource('journals', JournalEntryController::class);
     Route::post('transaksi/reset', [JournalEntryController::class,'reset_transaksi'])->name('transaksi.reset');
     

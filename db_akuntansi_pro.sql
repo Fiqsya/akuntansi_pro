@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 12, 2025 at 11:11 AM
+-- Generation Time: Jul 12, 2025 at 05:27 AM
 -- Server version: 8.0.30
--- PHP Version: 8.3.20
+-- PHP Version: 8.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `accounting_periods` (
   `id` bigint UNSIGNED NOT NULL,
-  `nama_periode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_periode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal_awal` date NOT NULL,
   `tanggal_akhir` date NOT NULL,
-  `status` enum('Dibuka','Ditutup') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Dibuka',
+  `status` enum('Dibuka','Ditutup') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Dibuka',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -52,10 +52,10 @@ INSERT INTO `accounting_periods` (`id`, `nama_periode`, `tanggal_awal`, `tanggal
 
 CREATE TABLE `accounts` (
   `id` bigint UNSIGNED NOT NULL,
-  `code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` enum('Aset','Kewajiban','Modal','Pendapatan','Beban') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `normal_balance` enum('Debit','Kredit') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` enum('Aset','Kewajiban','Modal','Pendapatan','Beban') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `normal_balance` enum('Debit','Kredit') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -123,8 +123,8 @@ INSERT INTO `accounts` (`id`, `code`, `name`, `type`, `normal_balance`, `created
 --
 
 CREATE TABLE `cache` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `value` mediumtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -145,8 +145,8 @@ INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
 --
 
 CREATE TABLE `cache_locks` (
-  `key` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `owner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `key` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `owner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `expiration` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -158,10 +158,10 @@ CREATE TABLE `cache_locks` (
 
 CREATE TABLE `cash_banks` (
   `id` bigint UNSIGNED NOT NULL,
-  `tipe_transaksi` enum('Masuk','Keluar') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sumber` enum('Kas','Bank') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipe_transaksi` enum('Masuk','Keluar') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sumber` enum('Kas','Bank') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal` date NOT NULL,
-  `deskripsi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deskripsi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `jumlah` decimal(20,2) NOT NULL,
   `account_id` bigint UNSIGNED NOT NULL,
   `journal_entry_id` bigint UNSIGNED DEFAULT NULL,
@@ -177,11 +177,11 @@ CREATE TABLE `cash_banks` (
 
 CREATE TABLE `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -193,8 +193,8 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `jobs` (
   `id` bigint UNSIGNED NOT NULL,
-  `queue` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `attempts` tinyint UNSIGNED NOT NULL,
   `reserved_at` int UNSIGNED DEFAULT NULL,
   `available_at` int UNSIGNED NOT NULL,
@@ -208,13 +208,13 @@ CREATE TABLE `jobs` (
 --
 
 CREATE TABLE `job_batches` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `total_jobs` int NOT NULL,
   `pending_jobs` int NOT NULL,
   `failed_jobs` int NOT NULL,
-  `failed_job_ids` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `options` mediumtext COLLATE utf8mb4_unicode_ci,
+  `failed_job_ids` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `options` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `cancelled_at` int DEFAULT NULL,
   `created_at` int NOT NULL,
   `finished_at` int DEFAULT NULL
@@ -241,60 +241,60 @@ CREATE TABLE `journal_details` (
 --
 
 INSERT INTO `journal_details` (`id`, `journal_entry_id`, `account_id`, `debit`, `credit`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '50000000.00', '0.00', '2025-06-12 00:27:02', '2025-06-12 00:27:02'),
-(2, 1, 16, '0.00', '50000000.00', '2025-06-12 00:27:02', '2025-06-12 00:27:02'),
-(3, 2, 5, '12000000.00', '0.00', '2025-06-12 00:39:01', '2025-06-12 00:39:01'),
-(4, 2, 1, '0.00', '12000000.00', '2025-06-12 00:39:01', '2025-06-12 00:39:01'),
-(5, 3, 4, '2000000.00', '0.00', '2025-06-12 02:05:06', '2025-06-12 02:05:06'),
-(6, 3, 1, '0.00', '2000000.00', '2025-06-12 02:05:06', '2025-06-12 02:05:06'),
-(7, 4, 8, '10000000.00', '0.00', '2025-06-12 02:09:51', '2025-06-12 02:09:51'),
-(8, 4, 12, '0.00', '10000000.00', '2025-06-12 02:09:51', '2025-06-12 02:09:51'),
-(9, 5, 1, '7500000.00', '0.00', '2025-06-12 02:11:10', '2025-06-12 02:11:10'),
-(10, 5, 19, '0.00', '7500000.00', '2025-06-12 02:11:10', '2025-06-12 02:11:10'),
-(11, 6, 3, '5000000.00', '0.00', '2025-06-12 02:12:21', '2025-06-12 02:12:21'),
-(12, 6, 19, '0.00', '5000000.00', '2025-06-12 02:12:21', '2025-06-12 02:12:21'),
-(13, 7, 22, '3000000.00', '0.00', '2025-06-12 02:18:43', '2025-06-12 02:18:43'),
-(14, 7, 1, '0.00', '3000000.00', '2025-06-12 02:18:43', '2025-06-12 02:18:43'),
-(15, 8, 24, '500000.00', '0.00', '2025-06-12 02:22:50', '2025-06-12 02:22:50'),
-(16, 8, 1, '0.00', '500000.00', '2025-06-12 02:22:50', '2025-06-12 02:22:50'),
-(17, 9, 25, '300000.00', '0.00', '2025-06-12 02:23:33', '2025-06-12 02:23:33'),
-(18, 9, 1, '0.00', '300000.00', '2025-06-12 02:23:33', '2025-06-12 02:23:33'),
-(19, 10, 12, '5000000.00', '0.00', '2025-06-12 02:24:32', '2025-06-12 02:24:32'),
-(20, 10, 1, '0.00', '5000000.00', '2025-06-12 02:24:32', '2025-06-12 02:24:32'),
-(21, 11, 1, '3000000.00', '0.00', '2025-06-12 03:00:59', '2025-06-12 03:00:59'),
-(22, 11, 3, '0.00', '3000000.00', '2025-06-12 03:00:59', '2025-06-12 03:00:59'),
-(23, 12, 26, '400000.00', '0.00', '2025-06-12 03:01:56', '2025-06-12 03:01:56'),
-(24, 12, 1, '0.00', '400000.00', '2025-06-12 03:01:56', '2025-06-12 03:01:56'),
-(25, 13, 1, '6000000.00', '0.00', '2025-06-12 03:05:08', '2025-06-12 03:05:08'),
-(26, 13, 20, '0.00', '6000000.00', '2025-06-12 03:05:08', '2025-06-12 03:05:08'),
-(27, 14, 36, '750000.00', '0.00', '2025-06-12 03:06:15', '2025-06-12 03:06:15'),
-(28, 14, 1, '0.00', '750000.00', '2025-06-12 03:06:15', '2025-06-12 03:06:15'),
-(29, 15, 42, '250000.00', '0.00', '2025-06-12 03:07:52', '2025-06-12 03:07:52'),
-(30, 15, 1, '0.00', '250000.00', '2025-06-12 03:07:52', '2025-06-12 03:07:52'),
-(31, 16, 1, '4000000.00', '0.00', '2025-06-12 03:08:23', '2025-06-12 03:08:23'),
-(32, 16, 19, '0.00', '4000000.00', '2025-06-12 03:08:23', '2025-06-12 03:08:23'),
-(33, 17, 17, '2000000.00', '0.00', '2025-06-12 03:09:00', '2025-06-12 03:09:00'),
-(34, 17, 1, '0.00', '2000000.00', '2025-06-12 03:09:00', '2025-06-12 03:09:00'),
-(35, 18, 1, '2000000.00', '0.00', '2025-06-12 03:09:47', '2025-06-12 03:09:47'),
-(36, 18, 3, '0.00', '2000000.00', '2025-06-12 03:09:47', '2025-06-12 03:09:47'),
-(37, 19, 12, '5000000.00', '0.00', '2025-06-12 03:10:30', '2025-06-12 03:10:30'),
-(38, 19, 1, '0.00', '5000000.00', '2025-06-12 03:10:30', '2025-06-12 03:10:30'),
-(39, 20, 34, '1000000.00', '0.00', '2025-06-12 03:11:25', '2025-06-12 03:11:25'),
-(40, 20, 1, '0.00', '1000000.00', '2025-06-12 03:11:25', '2025-06-12 03:11:25'),
-(41, 21, 33, '5000000.00', '0.00', '2025-06-12 03:11:59', '2025-06-12 03:11:59'),
-(42, 21, 1, '0.00', '5000000.00', '2025-06-12 03:11:59', '2025-06-12 03:11:59'),
-(43, 22, 23, '4000000.00', '0.00', '2025-06-12 03:17:57', '2025-06-12 03:17:57'),
-(44, 22, 5, '0.00', '4000000.00', '2025-06-12 03:17:57', '2025-06-12 03:17:57'),
-(45, 23, 30, '1500000.00', '0.00', '2025-06-12 03:19:27', '2025-06-12 03:19:27'),
-(46, 23, 4, '0.00', '1500000.00', '2025-06-12 03:19:27', '2025-06-12 03:19:27'),
-(47, 24, 27, '500000.00', '0.00', '2025-06-12 03:30:49', '2025-06-12 03:30:49'),
-(48, 24, 9, '0.00', '500000.00', '2025-06-12 03:30:49', '2025-06-12 03:30:49'),
-(49, 25, 15, '2000000.00', '0.00', '2025-06-12 03:31:47', '2025-06-12 03:31:47'),
-(50, 25, 20, '0.00', '2000000.00', '2025-06-12 03:31:47', '2025-06-12 03:31:47'),
-(51, 26, 22, '1000000.00', '0.00', '2025-06-12 03:32:28', '2025-06-12 03:32:28'),
-(52, 26, 13, '0.00', '1000000.00', '2025-06-12 03:32:28', '2025-06-12 03:32:28'),
-(53, 27, 19, '16500000.00', '0.00', '2025-06-12 03:39:18', '2025-06-12 03:39:18'),
-(54, 27, 50, '0.00', '16500000.00', '2025-06-12 03:39:18', '2025-06-12 03:39:18');
+(1, 1, 1, 50000000.00, 0.00, '2025-06-12 00:27:02', '2025-06-12 00:27:02'),
+(2, 1, 16, 0.00, 50000000.00, '2025-06-12 00:27:02', '2025-06-12 00:27:02'),
+(3, 2, 5, 12000000.00, 0.00, '2025-06-12 00:39:01', '2025-06-12 00:39:01'),
+(4, 2, 1, 0.00, 12000000.00, '2025-06-12 00:39:01', '2025-06-12 00:39:01'),
+(5, 3, 4, 2000000.00, 0.00, '2025-06-12 02:05:06', '2025-06-12 02:05:06'),
+(6, 3, 1, 0.00, 2000000.00, '2025-06-12 02:05:06', '2025-06-12 02:05:06'),
+(7, 4, 8, 10000000.00, 0.00, '2025-06-12 02:09:51', '2025-06-12 02:09:51'),
+(8, 4, 12, 0.00, 10000000.00, '2025-06-12 02:09:51', '2025-06-12 02:09:51'),
+(9, 5, 1, 7500000.00, 0.00, '2025-06-12 02:11:10', '2025-06-12 02:11:10'),
+(10, 5, 19, 0.00, 7500000.00, '2025-06-12 02:11:10', '2025-06-12 02:11:10'),
+(11, 6, 3, 5000000.00, 0.00, '2025-06-12 02:12:21', '2025-06-12 02:12:21'),
+(12, 6, 19, 0.00, 5000000.00, '2025-06-12 02:12:21', '2025-06-12 02:12:21'),
+(13, 7, 22, 3000000.00, 0.00, '2025-06-12 02:18:43', '2025-06-12 02:18:43'),
+(14, 7, 1, 0.00, 3000000.00, '2025-06-12 02:18:43', '2025-06-12 02:18:43'),
+(15, 8, 24, 500000.00, 0.00, '2025-06-12 02:22:50', '2025-06-12 02:22:50'),
+(16, 8, 1, 0.00, 500000.00, '2025-06-12 02:22:50', '2025-06-12 02:22:50'),
+(17, 9, 25, 300000.00, 0.00, '2025-06-12 02:23:33', '2025-06-12 02:23:33'),
+(18, 9, 1, 0.00, 300000.00, '2025-06-12 02:23:33', '2025-06-12 02:23:33'),
+(19, 10, 12, 5000000.00, 0.00, '2025-06-12 02:24:32', '2025-06-12 02:24:32'),
+(20, 10, 1, 0.00, 5000000.00, '2025-06-12 02:24:32', '2025-06-12 02:24:32'),
+(21, 11, 1, 3000000.00, 0.00, '2025-06-12 03:00:59', '2025-06-12 03:00:59'),
+(22, 11, 3, 0.00, 3000000.00, '2025-06-12 03:00:59', '2025-06-12 03:00:59'),
+(23, 12, 26, 400000.00, 0.00, '2025-06-12 03:01:56', '2025-06-12 03:01:56'),
+(24, 12, 1, 0.00, 400000.00, '2025-06-12 03:01:56', '2025-06-12 03:01:56'),
+(25, 13, 1, 6000000.00, 0.00, '2025-06-12 03:05:08', '2025-06-12 03:05:08'),
+(26, 13, 20, 0.00, 6000000.00, '2025-06-12 03:05:08', '2025-06-12 03:05:08'),
+(27, 14, 36, 750000.00, 0.00, '2025-06-12 03:06:15', '2025-06-12 03:06:15'),
+(28, 14, 1, 0.00, 750000.00, '2025-06-12 03:06:15', '2025-06-12 03:06:15'),
+(29, 15, 42, 250000.00, 0.00, '2025-06-12 03:07:52', '2025-06-12 03:07:52'),
+(30, 15, 1, 0.00, 250000.00, '2025-06-12 03:07:52', '2025-06-12 03:07:52'),
+(31, 16, 1, 4000000.00, 0.00, '2025-06-12 03:08:23', '2025-06-12 03:08:23'),
+(32, 16, 19, 0.00, 4000000.00, '2025-06-12 03:08:23', '2025-06-12 03:08:23'),
+(33, 17, 17, 2000000.00, 0.00, '2025-06-12 03:09:00', '2025-06-12 03:09:00'),
+(34, 17, 1, 0.00, 2000000.00, '2025-06-12 03:09:00', '2025-06-12 03:09:00'),
+(35, 18, 1, 2000000.00, 0.00, '2025-06-12 03:09:47', '2025-06-12 03:09:47'),
+(36, 18, 3, 0.00, 2000000.00, '2025-06-12 03:09:47', '2025-06-12 03:09:47'),
+(37, 19, 12, 5000000.00, 0.00, '2025-06-12 03:10:30', '2025-06-12 03:10:30'),
+(38, 19, 1, 0.00, 5000000.00, '2025-06-12 03:10:30', '2025-06-12 03:10:30'),
+(39, 20, 34, 1000000.00, 0.00, '2025-06-12 03:11:25', '2025-06-12 03:11:25'),
+(40, 20, 1, 0.00, 1000000.00, '2025-06-12 03:11:25', '2025-06-12 03:11:25'),
+(41, 21, 33, 5000000.00, 0.00, '2025-06-12 03:11:59', '2025-06-12 03:11:59'),
+(42, 21, 1, 0.00, 5000000.00, '2025-06-12 03:11:59', '2025-06-12 03:11:59'),
+(43, 22, 23, 4000000.00, 0.00, '2025-06-12 03:17:57', '2025-06-12 03:17:57'),
+(44, 22, 5, 0.00, 4000000.00, '2025-06-12 03:17:57', '2025-06-12 03:17:57'),
+(45, 23, 30, 1500000.00, 0.00, '2025-06-12 03:19:27', '2025-06-12 03:19:27'),
+(46, 23, 4, 0.00, 1500000.00, '2025-06-12 03:19:27', '2025-06-12 03:19:27'),
+(47, 24, 27, 500000.00, 0.00, '2025-06-12 03:30:49', '2025-06-12 03:30:49'),
+(48, 24, 9, 0.00, 500000.00, '2025-06-12 03:30:49', '2025-06-12 03:30:49'),
+(49, 25, 15, 2000000.00, 0.00, '2025-06-12 03:31:47', '2025-06-12 03:31:47'),
+(50, 25, 20, 0.00, 2000000.00, '2025-06-12 03:31:47', '2025-06-12 03:31:47'),
+(51, 26, 22, 1000000.00, 0.00, '2025-06-12 03:32:28', '2025-06-12 03:32:28'),
+(52, 26, 13, 0.00, 1000000.00, '2025-06-12 03:32:28', '2025-06-12 03:32:28'),
+(53, 27, 19, 16500000.00, 0.00, '2025-06-12 03:39:18', '2025-06-12 03:39:18'),
+(54, 27, 50, 0.00, 16500000.00, '2025-06-12 03:39:18', '2025-06-12 03:39:18');
 
 -- --------------------------------------------------------
 
@@ -304,11 +304,11 @@ INSERT INTO `journal_details` (`id`, `journal_entry_id`, `account_id`, `debit`, 
 
 CREATE TABLE `journal_entries` (
   `id` bigint UNSIGNED NOT NULL,
-  `transaction_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transaction_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` date NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_by` bigint UNSIGNED NOT NULL,
-  `type` enum('Umum','Penyesuaian','Penutup') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` enum('Umum','Penyesuaian','Penutup') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -354,7 +354,7 @@ INSERT INTO `journal_entries` (`id`, `transaction_code`, `date`, `description`, 
 
 CREATE TABLE `migrations` (
   `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -373,7 +373,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2025_06_11_082021_create_table_journal_details', 1),
 (9, '2025_06_11_101329_create_cash_banks_table', 1),
 (10, '2025_06_11_102149_create_accounting_periods_table', 1),
-(11, '2025_06_11_105510_create_units_table', 1);
+(11, '2025_06_11_105510_create_units_table', 1),
+(12, '2025_07_11_072345_create_suppliers_table', 2),
+(13, '2025_07_12_034116_create_produks_table', 2);
 
 -- --------------------------------------------------------
 
@@ -382,8 +384,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -395,13 +397,28 @@ CREATE TABLE `password_reset_tokens` (
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tokenable_id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produks`
+--
+
+CREATE TABLE `produks` (
+  `id` bigint UNSIGNED NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `satuan` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `harga_beli` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -413,11 +430,11 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 CREATE TABLE `sessions` (
-  `id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` bigint UNSIGNED DEFAULT NULL,
-  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `last_activity` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -426,7 +443,23 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('3j7Sc7yi77a0emB0n9rbknx4SHlqwWUgAeJn0WoN', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiT1lBQndOUWpXZU1tVkExc0pGOEdjdHRuZFNYbnZWd3JvcHhJcU9WMiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fX0=', 1752296533),
 ('zyolR06u671soTB7HRJpqa7zrHOU0Y5AOu1ZcS4g', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiendKZGVhWDFSc2kwWmQzY1dCVWpKTjVKU3VOdDhBbkxYMUtOM3FIRCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9sYXBvcmFuL2p1cm5hbC11bXVtIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTtzOjIxOiJwYXNzd29yZF9oYXNoX3NhbmN0dW0iO3M6NjA6IiQyeSQxMiRXOFNwRnR2V0txL29yUHMvemllR0xlMDIyUTFMV3h4NVRIR2pldy5CVEg5VldhVUpLeVF2UyI7fQ==', 1749726644);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `suppliers`
+--
+
+CREATE TABLE `suppliers` (
+  `id` bigint UNSIGNED NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `handphone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -436,9 +469,9 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 
 CREATE TABLE `units` (
   `id` bigint UNSIGNED NOT NULL,
-  `kode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `kode` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -451,16 +484,16 @@ CREATE TABLE `units` (
 
 CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `two_factor_secret` text COLLATE utf8mb4_unicode_ci,
-  `two_factor_recovery_codes` text COLLATE utf8mb4_unicode_ci,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `two_factor_secret` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `two_factor_recovery_codes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `two_factor_confirmed_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `current_team_id` bigint UNSIGNED DEFAULT NULL,
-  `profile_photo_path` varchar(2048) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_photo_path` varchar(2048) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -470,7 +503,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `created_at`, `updated_at`) VALUES
-(1, 'Herianto', 'herianto.sy@gmail.com', NULL, '$2y$12$W8SpFtvWKq/orPs/zieGLe022Q1LWxx5THGjew.BTH9VWaUJKyQvS', NULL, NULL, NULL, NULL, NULL, NULL, '2025-06-11 23:40:50', '2025-06-11 23:40:50');
+(1, 'Herianto', 'herianto.sy@gmail.com', NULL, '$2y$12$W8SpFtvWKq/orPs/zieGLe022Q1LWxx5THGjew.BTH9VWaUJKyQvS', NULL, NULL, NULL, NULL, NULL, NULL, '2025-06-11 23:40:50', '2025-06-11 23:40:50'),
+(2, 'Rani', 'ranirafiqah786@gmail.com', NULL, '$2y$12$pwr5MxppCy03znSdbsebZe1lTSJkZUImZ6cznM7phTfkWBmqmZMzi', NULL, NULL, NULL, NULL, NULL, NULL, '2025-07-11 20:22:51', '2025-07-11 20:22:51');
 
 --
 -- Indexes for dumped tables
@@ -566,12 +600,24 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `produks`
+--
+ALTER TABLE `produks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
   ADD PRIMARY KEY (`id`),
   ADD KEY `sessions_user_id_index` (`user_id`),
   ADD KEY `sessions_last_activity_index` (`last_activity`);
+
+--
+-- Indexes for table `suppliers`
+--
+ALTER TABLE `suppliers`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `units`
@@ -637,12 +683,24 @@ ALTER TABLE `journal_entries`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `produks`
+--
+ALTER TABLE `produks`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `suppliers`
+--
+ALTER TABLE `suppliers`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
@@ -655,7 +713,7 @@ ALTER TABLE `units`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

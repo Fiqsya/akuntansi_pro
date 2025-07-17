@@ -79,7 +79,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/dashboard') }}">Akuntansi</a>
+            <a class="navbar-brand" href="{{ url('/dashboard') }}">UAS Rani Rafiqah | 24072002</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -91,6 +91,7 @@
                             Transaksi
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('masuks.index') }}">Barang Masuk</a></li>
                             <li><a class="dropdown-item" href="{{ route('journals.index') }}">Jurnal Umum</a></li>
                             <li><a class="dropdown-item" href="{{ route('journals.penyesuaian') }}">Jurnal Penyesuaian</a></li>
                             <li><a class="dropdown-item" href="{{ route('journals.penutup') }}">Jurnal Penutup</a></li>
@@ -104,7 +105,19 @@
                             Data Master
                         </a>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('suppliers.index') }}">Master Supplier</a></li>
+                            <li><a class="dropdown-item" href="{{ route('produks.index') }}">Master Produk</a></li>
                             <li><a class="dropdown-item" href="{{ route('accounts.index') }}">Daftar Akun</a></li>
+                            <li><a class="dropdown-item" href="{{ route('periode-akuntansi.index') }}">Periode Akuntansi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('units.index') }}">Unit / Departemen</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="menuMaster" data-bs-toggle="dropdown">
+                            Data Master Akademik
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ route('siswas.index') }}">Siswa</a></li>
                             <li><a class="dropdown-item" href="{{ route('periode-akuntansi.index') }}">Periode Akuntansi</a></li>
                             <li><a class="dropdown-item" href="{{ route('units.index') }}">Unit / Departemen</a></li>
                         </ul>
