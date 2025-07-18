@@ -9,7 +9,7 @@
 @section('content')
 <div class="container">
     <br>
-    <h4>Daftar Produk</h4>
+    <h4>Daftar Barang Masuk</h4>
     <a href="{{ route('masuks.create') }}" class="btn btn-primary mb-3">Tambah Barang Masuk</a>
 
     <table class="table table-bordered table-sm" id="tabel-akun">
